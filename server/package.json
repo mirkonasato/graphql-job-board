@@ -1,0 +1,19 @@
+{
+  "name": "job-board-server",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon --ext js,graphql --ignore data/ server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.0",
+    "express-jwt": "^7.5.0",
+    "fakebase": "^0.3.0",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
