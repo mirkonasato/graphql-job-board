@@ -3,7 +3,7 @@ import { getAccessToken } from '../auth';
 
 const GRAPHQL_URL = 'http://localhost:9000/graphql';
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
   uri: GRAPHQL_URL,
   cache: new InMemoryCache(),
 });
@@ -27,6 +27,19 @@ const JOB_QUERY = gql`
     }
   }
   ${JOB_DETAIL_FRAGMENT}
+`;
+
+export const JOBS_QUERY = gql`
+  query JobsQuery {
+    jobs {
+      id
+      title
+      company {
+        id
+        name
+      }
+    }
+  }
 `;
 
 export async function createJob(input) {
@@ -83,24 +96,4 @@ export async function getJob(id) {
     variables,
   });
   return job;
-}
-
-export async function getJobs() {
-  const query = gql`
-    query JobsQuery {
-      jobs {
-        id
-        title
-        company {
-          id
-          name
-        }
-      }
-    }
-  `;
-  const { data: { jobs } } = await client.query({
-    query,
-    fetchPolicy: 'network-only',
-  });
-  return jobs;
 }
