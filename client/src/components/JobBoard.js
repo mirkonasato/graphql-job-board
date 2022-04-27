@@ -7,7 +7,10 @@ function JobBoard() {
   const [error, setError] = useState(false);
   useEffect(() => {
     getJobs().then(setJobs)
-      .catch((err) => setError(true));
+      .catch((err) => {
+        console.error(err);
+        setError(true);
+      });
   }, []);
 
   console.log('[JobBoard] jobs:', jobs);

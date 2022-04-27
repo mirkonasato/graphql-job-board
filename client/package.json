@@ -7,6 +7,7 @@
     "build": "react-scripts build"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.0",
     "bulma": "^0.9.3",
     "graphql": "^16.4.0",
     "graphql-request": "^4.2.0",
