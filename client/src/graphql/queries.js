@@ -75,6 +75,9 @@ export async function getJobs() {
       }
     }
   `;
-  const { data: { jobs } } = await client.query({ query });
+  const { data: { jobs } } = await client.query({
+    query,
+    fetchPolicy: 'network-only',
+  });
   return jobs;
 }
