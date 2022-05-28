@@ -1,7 +1,9 @@
-import { Database } from 'fakebase';
+import knex from 'knex';
 
-const db = new Database('./data');
-
-export const Company = db.table('companies');
-export const Job = db.table('jobs');
-export const User = db.table('users');
+export const db = knex({
+  client: 'better-sqlite3',
+  connection: {
+    filename: './data/db.sqlite3',
+  },
+  useNullAsDefault: true,
+});

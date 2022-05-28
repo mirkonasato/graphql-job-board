@@ -8,12 +8,15 @@
   },
   "dependencies": {
     "apollo-server-express": "^3.11.1",
+    "better-sqlite3": "^8.0.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "express-jwt": "^8.2.1",
     "fakebase": "^0.3.0",
     "graphql": "^16.6.0",
-    "jsonwebtoken": "^9.0.0"
+    "jsonwebtoken": "^9.0.0",
+    "knex": "^2.3.0",
+    "nanoid": "^4.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
