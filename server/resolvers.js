@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import { db } from './db.js';
+import { companyLoader, db } from './db.js';
 
 function rejectIf(condition) {
   if (condition) {
@@ -41,7 +41,7 @@ export const resolvers = {
 
   Job: {
     company: async (job) => {
-      return await db.select().from('companies').where('id', job.companyId).first();
+      return await companyLoader.load(job.companyId);
     },
   },
 };
