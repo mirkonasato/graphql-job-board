@@ -13,10 +13,12 @@ db.on('query', ({ sql, bindings }) => {
   console.log('[db]', sql, bindings);
 });
 
-export const companyLoader = new DataLoader(async (companyIds) => {
-  console.log('[companyLoader] companyIds:', companyIds);
-  const companies = await db.select().from('companies').whereIn('id', companyIds);
-  return companyIds.map((companyId) => {
-    return companies.find((company) => company.id === companyId);
-  })
-});
+export function createCompanyLoader() {
+  return new DataLoader(async (companyIds) => {
+    console.log('[companyLoader] companyIds:', companyIds);
+    const companies = await db.select().from('companies').whereIn('id', companyIds);
+    return companyIds.map((companyId) => {
+      return companies.find((company) => company.id === companyId);
+    })
+  });
+}
