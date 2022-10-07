@@ -1,0 +1,18 @@
+<div class="page" [formGroup]="loginForm">
+  <div>
+    <mat-form-field  appearance="outline">
+      <mat-label>Email</mat-label>
+      <input formControlName="email" matInput placeholder="Type in the email">
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input formControlName="password" matInput placeholder="Type in the password">
+      <mat-icon matSuffix>password</mat-icon>
+    </mat-form-field>
+  </div>
+  <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="login()">Login</button>
+</div>
+

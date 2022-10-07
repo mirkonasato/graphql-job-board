@@ -1,0 +1,11 @@
+Backend:
+- Server created wit express (js framework for backend)
+-  Run with npm start and test queries in https://studio.apollographql.com/sandbox/explorer
+-  Fake db
+-  Login method that is not graph ql related
+-  Apollo server config ( that is the tool that makes possible integrating graphql in backend)
+-  The connection between Apollo and my server is via middleware
+-  Apollo server receives there params: the context that can contain any config ( I am using to check if user is authenticated) and typeDefs and resolvers
+-  typeDefs: Query and Params are graph-ql base types. Queries are used for retrieving data, Mutations are used to change data. In graphql servers all requests are of type POST.
+-  Custom types: grapple has the type ID, ! For values that are required. If they are called with a null value (from client or db ), the server  will throw an error. Type array with non null elements.
+-  The resolver must match the schema. We can see 3 params for the methods: the second one contains the query params, the third is the context (in which we added the context)
