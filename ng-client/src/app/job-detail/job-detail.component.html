@@ -1,0 +1,7 @@
+<mat-card *ngIf="job" class="example-card">
+  <mat-card-title>{{job.title}}</mat-card-title>
+  <button mat-button color="primary" (click)="showCompany(job.company)">{{job.company.name}}</button>
+  <mat-card-content>
+    <p>{{job.description}}</p>
+  </mat-card-content>
+</mat-card>

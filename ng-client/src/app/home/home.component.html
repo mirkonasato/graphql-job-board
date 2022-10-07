@@ -1,0 +1,18 @@
+<div class="page">
+  <h1>Jobs Board</h1>
+  <mat-card-actions>
+    <button mat-icon-button color="primary" aria-label="Refresh" (click)="refresh()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <button *ngIf="isLoggedIn" mat-raised-button color="primary" (click)="newJob()">New Job</button>
+  </mat-card-actions>
+  <mat-nav-list>
+    <mat-list-item *ngFor="let job of jobs | async">
+      <a matLine >{{ job.title }}</a>
+      <button mat-icon-button (click)="showJobDetail(job)">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-nav-list>
+</div>
+

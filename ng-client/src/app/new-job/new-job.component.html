@@ -1,0 +1,16 @@
+<div class="page" [formGroup]="jobForm">
+  <h1>Post a new job</h1>
+  <div>
+    <mat-form-field  appearance="outline">
+      <mat-label>Title</mat-label>
+      <input formControlName="title" matInput placeholder="Job title">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea formControlName="description" matInput placeholder="Job description"></textarea>
+    </mat-form-field>
+  </div>
+  <button mat-raised-button color="primary" [disabled]="jobForm.invalid" (click)="createJob()">Post Job</button>
+</div>

@@ -1,0 +1,11 @@
+<mat-card class="example-card">
+  <mat-card-title>{{company?.name}}</mat-card-title>
+  <mat-card-subtitle>{{company?.description}}</mat-card-subtitle>
+  <mat-card-content >
+    <mat-nav-list>
+      <mat-list-item *ngFor="let job of company?.jobs">
+        <a matLine >{{ job.title }}</a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-card-content>
+</mat-card>
