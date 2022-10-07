@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private apollo: Apollo, private router: Router, private authService: AuthenticationService) {
     this.jobsQuery = this.apollo.watchQuery<any>({
       query: JOBS_QUERY,
+      // pollInterval: 500, // Update repeat
     });
   }
 
