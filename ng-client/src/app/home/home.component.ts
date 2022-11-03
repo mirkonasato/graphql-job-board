@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {map, Observable, Subscription} from "rxjs";
-import {Apollo, QueryRef} from "apollo-angular";
-import {COMPANY_QUERY, JOBS_QUERY} from "../graphql/all-queries";
+import {QueryRef} from "apollo-angular";
 import {Router} from "@angular/router";
-import {Job} from "../graphql/models/jobs.model";
 import {AuthenticationService} from "../services/authentication.service";
+import {JobsQueryGQL, JobsQueryQuery} from "../graphql/queries.graphql-gen";
+import type {Exact, Job} from "../graphql/generated/types.graphql-gen";
 
 @Component({
   selector: 'app-home',
@@ -13,28 +13,16 @@ import {AuthenticationService} from "../services/authentication.service";
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  jobs: Observable<any> | undefined;
-  jobsQuery: QueryRef<Job[]>;
+  jobs$: Observable<Job[]> | undefined;
+  jobsQuery: QueryRef<JobsQueryQuery, Exact<{ [key: string]: never; }>> | undefined;
   readonly #subscriptions: Subscription = new Subscription();
-  constructor(private apollo: Apollo, private router: Router, private authService: AuthenticationService) {
-    this.jobsQuery = this.apollo.watchQuery<any>({
-      query: JOBS_QUERY,
-      // pollInterval: 500, // Update repeat
-    });
+  constructor( private router: Router, private authService: AuthenticationService,
+               private jobsQueryGQL:JobsQueryGQL) {
   }
 
   ngOnInit(): void {
-    this.jobs = this.jobsQuery.valueChanges.pipe(map(({ data: {jobs} }: any) => jobs));
-
-    this.#subscriptions.add(this.apollo
-      .watchQuery({
-        query: COMPANY_QUERY,
-        variables: {id: 'pVbRRBQtMVw6lUAkj1k43'},
-      })
-      .valueChanges.subscribe(({ data, loading }: any) => {
-        console.log('company',data);
-        console.log('loading',loading);
-      }));
+    this.jobsQuery = this.jobsQueryGQL.watch(undefined, {pollInterval: 500});
+    this.jobs$ = this.jobsQuery.valueChanges.pipe(map(({ data: {jobs} }: any) => jobs));
   }
 
   newJob() {
@@ -42,7 +30,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   async refresh(): Promise<void> {
-    await this.jobsQuery.refetch();
+    await this.jobsQuery?.refetch();
   }
 
   async showJobDetail(job: any): Promise<void> {

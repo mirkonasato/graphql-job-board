@@ -1,0 +1,9 @@
+fragment JobDetail on Job {
+  id
+  title
+  company {
+    id
+    name
+  }
+  description
+}

@@ -1,0 +1,29 @@
+query JobsQuery {
+  jobs {
+    id
+    title
+    company {
+      id
+      name
+    }
+  }
+}
+
+query CompanyQuery($id: ID!) {
+  company(id: $id) {
+    id
+    name
+    description
+    jobs {
+      id
+      title
+    }
+  }
+}
+
+query JobQuery($id: ID!) {
+  job(id: $id) {
+    ...JobDetail
+  }
+}
+

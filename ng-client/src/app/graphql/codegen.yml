@@ -1,0 +1,19 @@
+overwrite: true
+schema: "http://localhost:9000/graphql"
+documents: "src/app/graphql/*.graphql"
+generates:
+  src/app/graphql/generated/types.graphql-gen.ts:
+    plugins:
+      - typescript
+  src/app/graphql/generated:
+    plugins:
+      - typescript-operations
+      - typescript-apollo-angular:
+          ngModule: ./graphql.module#GraphQLModule
+    preset: near-operation-file
+    presetConfig:
+      extension: .graphql-gen.ts
+      baseTypesPath: types.graphql-gen.ts
+    config:
+      addExplicitOverride: true
+
